@@ -91,4 +91,6 @@ for page in pages:
 
 total_amount_portals.write("Total geral de bases: " + str(total_general))
 
+all_portals.close()
+bot_portals.close()
 driver.close()
