@@ -1,6 +1,5 @@
-from selenium import webdriver
-
-driver = webdriver.Chrome()
+import requests
+from bs4 import BeautifulSoup as bs
 
 pages = [
     "http://colaboradados.com.br/states/acre.html", "http://colaboradados.com.br/states/alagoas.html",
@@ -52,45 +51,59 @@ exclude = [
     "Reddit com informações moderadas a todo momento"
 ]
 
-all_portals = open("all_portals.csv", "w")
-bot_portals = open("bot_portals.csv", "w")
+if __name__ == "__main__":
+    all_portals = open("all_portals.csv", "w")
+    bot_portals = open("bot_portals.csv", "w")
 
-all_portals.write("url;orgao\n")
-bot_portals.write("url;orgao\n")
+    all_portals.write("url;orgao\n")
+    bot_portals.write("url;orgao\n")
 
-total_amount_portals = open("total_amount_portals.txt","w")
-total_amount_portals.write("----- CONTAGEM DE BASES - COLABORADADOS -----\n")
-total_general = 0
-total_city = 0
-count_cities = True
+    total_amount_portals = open("total_amount_portals.txt", "w")
+    total_amount_portals.write(
+        "----- CONTAGEM DE BASES - COLABORADADOS -----\n"
+    )
 
-for page in pages:
-    driver.get(page)
-    title = driver.find_element_by_class_name("title")
-    strongs = driver.find_elements_by_xpath("//strong")
-    total_portals = len(strongs)
-    total_amount_portals.write("{}: {}\n".format(title.text, total_portals))
-    total_general += total_portals
-    if page == "http://colaboradados.com.br/jekyll/update/2019/01/21/esfera-federal.html":
-        count_cities = False
-        total_amount_portals.write("ESFERA MUNICIPAL: {}\n".format(total_city))
-    if count_cities:
-        total_city += total_portals
+    total_general = 0
+    total_city = 0
+    count_cities = True
 
-    for strong in strongs:
-        orgao = strong.text
-        links = strong.find_elements_by_tag_name('a')
-        for link in links:
-            url = link.get_attribute("href")
-            all_portals.write(url + ";")
+    for page in pages:
+        response = requests.get(page)
+        soup = bs(response.text, "html.parser")
+        main_div = soup.find("div", {"id": "main"})
+
+        title = soup.find("title")
+        strongs = main_div.find_all("strong")
+
+        total_portals = len(strongs)
+        total_amount_portals.write(f"{title.text}: {total_portals}\n")
+
+        total_general += total_portals
+
+        if page == "http://colaboradados.com.br/jekyll/update/2019/01/21/esfera-federal.html":
+            count_cities = False
+            total_amount_portals.write(f"ESFERA MUNICIPAL: {total_city}\n")
+
+        if count_cities:
+            total_city += total_portals
+
+        for strong in strongs:
+            orgao = strong.text
+            links = strong.find_all('a')
+
+            for link in links:
+                url = link.get("href", None)
+                all_portals.write(f"{url};")
+
+                if not (orgao in exclude or page in exclude):
+                    bot_portals.write(f"{url};")
+
             if not (orgao in exclude or page in exclude):
-                bot_portals.write(url + ";")
-        if not (orgao in exclude or page in exclude):
-            bot_portals.write(orgao.replace(":", "") + "\n")
-        all_portals.write(orgao.replace(":", "") + "\n")
+                bot_portals.write(orgao.replace(":", "") + "\n")
 
-total_amount_portals.write("Total geral de bases: " + str(total_general))
+            all_portals.write(orgao.replace(":", "") + "\n")
 
-all_portals.close()
-bot_portals.close()
-driver.close()
+    total_amount_portals.write(f"Total geral de bases: {total_general}")
+
+    all_portals.close()
+    bot_portals.close()
