@@ -8,7 +8,7 @@ A organização deste repositório é feito por meio de pastas. Cada pasta conte
 
 ## Lista de Pastas:
 
--  **Nome da pasta:** [scraping-portals-static-website-selenium-v1](https://github.com/colaboradados/scripts/tree/master/scraping-portals-static-website-selenium-v1):
+-  **Nome da pasta:** [scraping-portals-static-website-selenium-v1](https://github.com/colaboradados/scripts/tree/master/scraping-portals-static-website-selenium-v1)
 	- **Objetivo:** Raspagem das bases do site estático do Colaboradados utilizando Selenium.
 	- **Como utilizar:** [how-to-use.md](https://github.com/colaboradados/scripts/blob/master/scraping-portals-static-website-selenium-v1/how-to-use.md)
 
