@@ -2,31 +2,31 @@ import requests
 from bs4 import BeautifulSoup as bs
 
 pages = [
-    "http://colaboradados.com.br/states/acre.html", "http://colaboradados.com.br/states/alagoas.html",
-    "http://colaboradados.com.br/states/amapa.html", "http://colaboradados.com.br/states/amazonas.html",
-    "http://colaboradados.com.br/states/bahia.html", "http://colaboradados.com.br/states/ceara.html",
-    "http://colaboradados.com.br/states/espirito-santo.html", "http://colaboradados.com.br/states/goias.html",
-    "http://colaboradados.com.br/states/maranhao.html", "http://colaboradados.com.br/states/mato-grosso-do-sul.html",
-    "http://colaboradados.com.br/states/mato-grosso.html", "http://colaboradados.com.br/states/minas-gerais.html",
-    "http://colaboradados.com.br/states/para.html", "http://colaboradados.com.br/states/paraiba.html",
-    "http://colaboradados.com.br/states/parana.html", "http://colaboradados.com.br/states/pernambuco.html",
-    "http://colaboradados.com.br/states/piaui.html", "http://colaboradados.com.br/states/rio-de-janeiro.html",
-    "http://colaboradados.com.br/states/rio-grande-do-norte.html", "http://colaboradados.com.br/states/rio-grande-do-sul.html",
-    "http://colaboradados.com.br/states/rondonia.html", "http://colaboradados.com.br/states/roraima.html",
-    "http://colaboradados.com.br/states/santa-catarina.html", "http://colaboradados.com.br/states/sao-paulo.html",
-    "http://colaboradados.com.br/states/sergipe.html", "http://colaboradados.com.br/states/tocantins.html",
-    "http://colaboradados.com.br/jekyll/update/2019/01/21/esfera-federal.html",
-    "http://colaboradados.com.br/jekyll/update/2019/01/20/esfera-estadual.html",
-    "http://colaboradados.com.br/jekyll/update/2019/01/18/cinema.html",
-    "http://colaboradados.com.br/jekyll/update/2019/01/17/musica.html",
-    "http://colaboradados.com.br/jekyll/update/2019/01/16/saude.html",
-    "http://colaboradados.com.br/jekyll/update/2019/01/15/educacao.html",
-    "http://colaboradados.com.br/jekyll/update/2019/01/14/paises.html",
-    "http://colaboradados.com.br/jekyll/update/2019/01/13/ibge.html",
-    "http://colaboradados.com.br/jekyll/update/2019/01/12/colecoes.html",
-    "http://colaboradados.com.br/jekyll/update/2019/01/11/seguranca-publica.html",
-    "http://colaboradados.com.br/jekyll/update/2019/01/10/meio-ambiente.html",
-    "http://colaboradados.com.br/jekyll/update/2020/03/19/coronavirus.html"
+    "https://site-colaboradados.herokuapp.com/states/acre.html", "https://site-colaboradados.herokuapp.com/states/alagoas.html",
+    "https://site-colaboradados.herokuapp.com/states/amapa.html", "https://site-colaboradados.herokuapp.com/states/amazonas.html",
+    "https://site-colaboradados.herokuapp.com/states/bahia.html", "https://site-colaboradados.herokuapp.com/states/ceara.html",
+    "https://site-colaboradados.herokuapp.com/states/espirito-santo.html", "https://site-colaboradados.herokuapp.com/states/goias.html",
+    "https://site-colaboradados.herokuapp.com/states/maranhao.html", "https://site-colaboradados.herokuapp.com/states/mato-grosso-do-sul.html",
+    "https://site-colaboradados.herokuapp.com/states/mato-grosso.html", "https://site-colaboradados.herokuapp.com/states/minas-gerais.html",
+    "https://site-colaboradados.herokuapp.com/states/para.html", "https://site-colaboradados.herokuapp.com/states/paraiba.html",
+    "https://site-colaboradados.herokuapp.com/states/parana.html", "https://site-colaboradados.herokuapp.com/states/pernambuco.html",
+    "https://site-colaboradados.herokuapp.com/states/piaui.html", "https://site-colaboradados.herokuapp.com/states/rio-de-janeiro.html",
+    "https://site-colaboradados.herokuapp.com/states/rio-grande-do-norte.html", "https://site-colaboradados.herokuapp.com/states/rio-grande-do-sul.html",
+    "https://site-colaboradados.herokuapp.com/states/rondonia.html", "https://site-colaboradados.herokuapp.com/states/roraima.html",
+    "https://site-colaboradados.herokuapp.com/states/santa-catarina.html", "https://site-colaboradados.herokuapp.com/states/sao-paulo.html",
+    "https://site-colaboradados.herokuapp.com/states/sergipe.html", "https://site-colaboradados.herokuapp.com/states/tocantins.html",
+    "https://site-colaboradados.herokuapp.com/jekyll/update/2019/01/21/esfera-federal.html",
+    "https://site-colaboradados.herokuapp.com/jekyll/update/2019/01/20/esfera-estadual.html",
+    "https://site-colaboradados.herokuapp.com/jekyll/update/2019/01/18/cinema.html",
+    "https://site-colaboradados.herokuapp.com/jekyll/update/2019/01/17/musica.html",
+    "https://site-colaboradados.herokuapp.com/jekyll/update/2019/01/16/saude.html",
+    "https://site-colaboradados.herokuapp.com/jekyll/update/2019/01/15/educacao.html",
+    "https://site-colaboradados.herokuapp.com/jekyll/update/2019/01/14/paises.html",
+    "https://site-colaboradados.herokuapp.com/jekyll/update/2019/01/13/ibge.html",
+    "https://site-colaboradados.herokuapp.com/jekyll/update/2019/01/12/colecoes.html",
+    "https://site-colaboradados.herokuapp.com/jekyll/update/2019/01/11/seguranca-publica.html",
+    "https://site-colaboradados.herokuapp.com/jekyll/update/2019/01/10/meio-ambiente.html",
+    "https://site-colaboradados.herokuapp.com/jekyll/update/2020/03/19/coronavirus.html"
 ]
 
 exclude = [
@@ -35,9 +35,9 @@ exclude = [
     "Base de dados de filmes estrangeiros exibidos no país entre o Omniógrafo (1896) e a passagem ao sonoro (1934)",
     "Base de dados de Filmes do Mercosul",
     "Portal de Acesso à Informação e Transparência dos Municípios do Estado do Amazonas",
-    "http://colaboradados.com.br/jekyll/update/2019/01/17/musica.html",
-    "http://colaboradados.com.br/jekyll/update/2019/01/14/paises.html",
-    "http://colaboradados.com.br/jekyll/update/2019/01/12/colecoes.html",
+    "https://site-colaboradados.herokuapp.com/jekyll/update/2019/01/17/musica.html",
+    "https://site-colaboradados.herokuapp.com/jekyll/update/2019/01/14/paises.html",
+    "https://site-colaboradados.herokuapp.com/jekyll/update/2019/01/12/colecoes.html",
     "ViriHealth – Canada’s Coronavirus COVID-19 Tracker",
     "Sundhedsstyrelsen (Ministério da saúde dinamarquês",
     "Governo britânico", "Global Change Data Lab",
@@ -80,7 +80,7 @@ if __name__ == "__main__":
 
         total_general += total_portals
 
-        if page == "http://colaboradados.com.br/jekyll/update/2019/01/21/esfera-federal.html":
+        if page == "https://site-colaboradados.herokuapp.com/jekyll/update/2019/01/21/esfera-federal.html":
             count_cities = False
             total_amount_portals.write(f"ESFERA MUNICIPAL: {total_city}\n")
 
